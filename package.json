@@ -1,7 +1,7 @@
 {
   "name": "react-qsort-game",
   "version": "0.0.1",
-  "description": "",
+  "description": "An online version of qsort game written in React.js",
   "main": "webpack.config.js",
   "dependencies": {
     "babel-core": "^6.17.0",
