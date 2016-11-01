@@ -1,8 +1,27 @@
-import React from "react";
+import React, { Component, PropTypes } from 'react';
+import { DragSource } from 'react-dnd';
+import { ItemTypes } from './ItemTypes';
 
-export default class Card extends React.Component {
+const cardSource = {
+  beginDrag(props) {
+    return {
+      title: props.title,
+      statement: props.statement,
+    };
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDragSource: connect.dragSource(),
+    isDragging: monitor.isDragging()
+  }
+}
+
+
+class Card extends React.Component {
   render() {
-    const { title,statement } = this.props;
+    // const { title,statement } = this.props;
     const squareStyle = {
       float:'left',
       position: 'relative',
@@ -36,3 +55,10 @@ export default class Card extends React.Component {
     );
   }
 }
+
+Card.propTypes = {
+  connectDragSource: PropTypes.func.isRequired,
+  isDragging: PropTypes.bool.isRequired
+};
+
+export default DragSource(ItemTypes.CARD, cardSource, collect)(Card);
