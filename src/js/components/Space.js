@@ -23,7 +23,7 @@ export default class Space extends React.Component {
     return (
       <div class="square" style={squareStyle}>
           <div class="content" style={contentStyle}>
-              {title}
+              <h4>{title}</h4>
           </div>
       </div>
     );
