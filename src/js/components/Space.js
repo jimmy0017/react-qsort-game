@@ -1,6 +1,22 @@
-import React from "react";
+import React, { PropTypes, Component } from 'react';
+import { ItemTypes } from './ItemTypes';
+import { DropTarget } from 'react-dnd';
 
-export default class Space extends React.Component {
+const spaceTarget = {
+  drop(props, monitor) {
+    // props.onDrop(monitor.getItem());
+  }
+};
+
+function collect(connect, monitor) {
+  return {
+    connectDropTarget: connect.dropTarget(),
+    isOver: monitor.isOver(),
+    canDrop: monitor.canDrop()
+  };
+}
+
+class Space extends React.Component {
   render() {
     const { title } = this.props;
     const squareStyle = {
@@ -29,3 +45,5 @@ export default class Space extends React.Component {
     );
   }
 }
+
+export default DropTarget(ItemTypes.CARD, spaceTarget, collect)(Space);
