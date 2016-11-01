@@ -4,7 +4,7 @@ import { DropTarget } from 'react-dnd';
 
 const spaceTarget = {
   drop(props, monitor) {
-    // props.onDrop(monitor.getItem());
+    props.onDrop(monitor.getItem());
   }
 };
 
@@ -17,8 +17,20 @@ function collect(connect, monitor) {
 }
 
 class Space extends React.Component {
+  static propTypes = {
+    title: PropTypes.string.isRequired,
+    connectDropTarget: PropTypes.func.isRequired,
+    isOver: PropTypes.bool.isRequired,
+    canDrop: PropTypes.bool.isRequired,
+    accepts: PropTypes.arrayOf(PropTypes.string).isRequired,
+    lastDroppedItem: PropTypes.object,
+    onDrop: PropTypes.func.isRequired
+  };
+
   render() {
-    const { title } = this.props;
+    const { title, accepts, isOver, canDrop, connectDropTarget, lastDroppedItem } = this.props;
+    const isActive = isOver && canDrop;
+
     const squareStyle = {
       float:'left',
       position: 'relative',

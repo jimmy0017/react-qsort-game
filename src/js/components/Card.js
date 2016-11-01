@@ -20,8 +20,17 @@ function collect(connect, monitor) {
 
 
 class Card extends React.Component {
+  static propTypes = {
+    connectDragSource: PropTypes.func.isRequired,
+    isDragging: PropTypes.bool.isRequired,
+    title: PropTypes.string.isRequired,
+    statement: PropTypes.string.isRequired,
+    type: PropTypes.string.isRequired,
+    isDropped: PropTypes.bool.isRequired
+  };
+
   render() {
-    // const { title,statement } = this.props;
+    const { title,statement, isDropped, isDragging, connectDragSource  } = this.props;
     const squareStyle = {
       float:'left',
       position: 'relative',
