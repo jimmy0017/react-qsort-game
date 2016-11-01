@@ -1,8 +1,12 @@
 import React, { Component, PropTypes } from 'react';
+import { DragDropContext } from 'react-dnd';
+import HTML5Backend from 'react-dnd-html5-backend';
+
+
 import Space from './Space';
 import Card from "./Card";
 
-export default class FirstStep extends Component {
+class FirstStep extends Component {
   render() {
     const Spaces = [
       "Disagree",
@@ -28,3 +32,5 @@ export default class FirstStep extends Component {
     );
   }
 }
+
+export default DragDropContext(HTML5Backend)(FirstStep);
