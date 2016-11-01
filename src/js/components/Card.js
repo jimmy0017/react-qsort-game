@@ -54,7 +54,7 @@ class Card extends React.Component {
       fontSize: '12px'
     };
 
-    return (
+    return connectDragSource(
       <div class="square" style={squareStyle}>
           <div class="content" style={contentStyle}>
               <label style={textTitleStyle}>{this.props.title}</label>

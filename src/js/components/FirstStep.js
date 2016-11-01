@@ -6,6 +6,8 @@ import {ItemTypes} from './ItemTypes';
 import Space from './Space';
 import Card from "./Card";
 
+import update from 'react/lib/update';
+
 class FirstStep extends Component {
   constructor(props) {
     super(props);
@@ -19,12 +21,12 @@ class FirstStep extends Component {
         { title:'Q1',statement:'Leaders get diverse groups to work together toward a common goal.' },
         { title:'Q2',statement:'Leaders are born with certain leadership traits.'},
       ],
-      droppedBoxNames: []
+      droppedCardNames: []
     };
   }
 
   isDropped(cardName) {
-    // return this.state.droppedBoxNames.indexOf(boxName) > -1;
+     return this.state.droppedCardNames.indexOf(cardName) > -1;
   }
 
   render() {
@@ -53,6 +55,23 @@ class FirstStep extends Component {
       </div>
 
     );
+  }
+
+  handleDrop(index, item) {
+    const { title } = item;
+
+    this.setState(update(this.state, {
+      spaces: {
+        [index]: {
+          lastDroppedItem: {
+            $set: item
+          }
+        }
+      },
+      droppedCardNames: name ? {
+        $push: [name]
+      } : {}
+    }));
   }
 }
 

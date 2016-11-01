@@ -1,6 +1,23 @@
 import React, { PropTypes, Component } from 'react';
-import { ItemTypes } from './ItemTypes';
+// import { ItemTypes } from './ItemTypes';
 import { DropTarget } from 'react-dnd';
+
+const squareStyle = {
+  float:'left',
+  position: 'relative',
+  width: '25%',
+  paddingBottom : '20%', /* = width for a 1:1 aspect ratio */
+  margin :'1.66%',
+  backgroundColor:'#FFFFFF',
+  overflow :'hidden',
+  borderStyle: 'dashed',
+};
+const contentStyle = {
+  position:'absolute',
+  height: '90%', /* = 100% - 2*5% padding */
+  width: '90%', /* = 100% - 2*5% padding */
+  padding: '5%',
+};
 
 const spaceTarget = {
   drop(props, monitor) {
@@ -31,31 +48,22 @@ class Space extends React.Component {
     const { title, accepts, isOver, canDrop, connectDropTarget, lastDroppedItem } = this.props;
     const isActive = isOver && canDrop;
 
-    const squareStyle = {
-      float:'left',
-      position: 'relative',
-      width: '25%',
-      paddingBottom : '20%', /* = width for a 1:1 aspect ratio */
-      margin :'1.66%',
-      backgroundColor:'#FFFFFF',
-      overflow :'hidden',
-      borderStyle: 'dashed',
-    };
-    const contentStyle = {
-      position:'absolute',
-      height: '90%', /* = 100% - 2*5% padding */
-      width: '90%', /* = 100% - 2*5% padding */
-      padding: '5%',
-    };
-
-    return (
+    return connectDropTarget(
       <div class="square" style={squareStyle}>
           <div class="content" style={contentStyle}>
               <h4>{title}</h4>
+              {isActive ?
+                'Release to drop' :
+                'This space accepts: ' + accepts.join(', ')
+              }
+
+              {lastDroppedItem &&
+                <p>Last dropped: {JSON.stringify(lastDroppedItem)}</p>
+              }
           </div>
       </div>
     );
   }
 }
 
-export default DropTarget(ItemTypes.CARD, spaceTarget, collect)(Space);
+export default DropTarget(props => props.accepts, spaceTarget, collect)(Space);
