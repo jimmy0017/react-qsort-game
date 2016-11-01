@@ -21,8 +21,10 @@ export default class Layout extends React.Component {
     return (
       <div>
         <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
-        <div class="row">
-          <FirstStep />
+        <div class="container">
+          <div class="row">
+            <FirstStep />
+          </div>
         </div>
         <Footer />
       </div>
