@@ -7,20 +7,13 @@ import FirstStep from "./FirstStep";
 export default class Layout extends React.Component {
   constructor() {
     super();
-    this.state = {
-      title: "Welcome",
-      statement: "test",
-    };
   }
 
-  changeTitle(title) {
-    this.setState({title});
-  }
 
   render() {
     return (
       <div>
-        <Header changeTitle={this.changeTitle.bind(this)} title={this.state.title} />
+        <Header  /> 
         <div class="container">
           <div class="row">
             <FirstStep />
