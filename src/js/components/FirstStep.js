@@ -18,16 +18,19 @@ class FirstStep extends Component {
         { title: "Agree", accepts: [ ItemTypes.CARD, NativeTypes.URL], lastDroppedItem: null },
       ],
       cards: [
-        { title:'Q1',statement:'Leaders get diverse groups to work together toward a common goal.' },
-        { title:'Q2',statement:'Leaders are born with certain leadership traits.'},
+        { id: 1, title:'Q1',statement:'Leaders get diverse groups to work together toward a common goal.',location_id: null },
+        { id: 2, title:'Q2',statement:'Leaders are born with certain leadership traits.', location_id:null},
       ],
       droppedCardNames: []
     };
   }
 
-  isDropped(cardName) {
-     return this.state.droppedCardNames.indexOf(cardName) > -1;
-  }
+  // isDropped(index,item) {
+  //     console.log("Isdropped:");
+  //     console.log(item);
+  //     console.log(index);
+  //    return this.state.cards[index].location_id = item.index - 3;
+  // }
 
   render() {
 
@@ -48,7 +51,7 @@ class FirstStep extends Component {
             <Card title={title}
                   statement={statement}
                   type={type}
-                  isDropped={this.isDropped(name)}
+                  // didDrop={this.isDropped(index, this)}
                   key={index} />
           )}
         </div>
@@ -58,8 +61,9 @@ class FirstStep extends Component {
   }
 
   handleDrop(index, item) {
-    const { title } = item;
-
+    console.log("Handle Drop");
+    console.log(item);
+    console.log(index);
     this.setState(update(this.state, {
       spaces: {
         [index]: {
@@ -68,9 +72,11 @@ class FirstStep extends Component {
           }
         }
       },
-      droppedCardNames: name ? {
-        $push: [name]
-      } : {}
+      // cards: {
+        // [key]:{
+          // location_id: index-3
+        // }
+      // },
     }));
   }
 }
