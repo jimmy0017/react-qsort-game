@@ -21,6 +21,8 @@ import {toggleLocation,fetchLocationNullStatement} from "../actions/index";
 class FirstStep extends Component {
   componentWillMount() {
     this.props.dispatch(fetchLocationNullStatement())
+    console.log("Run first step")
+    // console.log(cards)
   }
 
   constructor(props) {
@@ -35,19 +37,19 @@ class FirstStep extends Component {
       //   { title:'Q1',statement:'Leaders get diverse groups to work together toward a common goal.' },
       //   { title:'Q2',statement:'Leaders are born with certain leadership traits.'},
       // ],
-      droppedCardNames: []
+      // droppedCardNames: []
     };
   }
 
-  isDropped(cardName) {
-     return this.state.droppedCardNames.indexOf(cardName) > -1;
-  }
+  // isDropped(cardName) {
+  //    return this.state.droppedCardNames.indexOf(cardName) > -1;
+  // }
 
   render() {
 
     const { spaces } = this.state;
     const { cards } = this.props;
-    console.log(cards)
+    // console.log(cards)
     return (
       <div>
         <div class="row">
@@ -64,7 +66,7 @@ class FirstStep extends Component {
             <Card title={title}
                   statement={statement}
                   type={type}
-                  isDropped={this.isDropped(name)}
+                  // isDropped={this.isDropped(name)}
                   key={index} />
           )}
         </div>

@@ -31,10 +31,12 @@ const statements = (state = [], action) => {
     //   return state.map(t =>
     //     todo(t, action)
     //   )
-    case "TOGGLE_LOCATION":
-      return state.map(t =>
-        statement(t, action)
-      )
+    // case "TOGGLE_LOCATION":
+    //   return state.map(t =>
+    //     statement(t, action)
+    //   )
+    case 'FETCH_LOCATION_NULL':
+      return state.filter(t => t.location_id ==null)
     default:
       return state
   }
