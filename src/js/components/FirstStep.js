@@ -8,7 +8,21 @@ import Card from "./Card";
 
 import update from 'react/lib/update';
 
+import { connect } from "react-redux";
+// import { fetchStatement } from "../actions/statementsActions";
+import {toggleLocation,fetchLocationNullStatement} from "../actions/index";
+
+@connect((store) => {
+  return {
+    cards: store.statements,
+  };
+})
+
 class FirstStep extends Component {
+  componentWillMount() {
+    this.props.dispatch(fetchLocationNullStatement())
+  }
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,10 +31,10 @@ class FirstStep extends Component {
         { title: "Neutral",accepts: [ItemTypes.CARD], lastDroppedItem: null }, // accepts: [ItemTypes.CARD],
         { title: "Agree", accepts: [ ItemTypes.CARD, NativeTypes.URL], lastDroppedItem: null },
       ],
-      cards: [
-        { title:'Q1',statement:'Leaders get diverse groups to work together toward a common goal.' },
-        { title:'Q2',statement:'Leaders are born with certain leadership traits.'},
-      ],
+      // cards: [
+      //   { title:'Q1',statement:'Leaders get diverse groups to work together toward a common goal.' },
+      //   { title:'Q2',statement:'Leaders are born with certain leadership traits.'},
+      // ],
       droppedCardNames: []
     };
   }
@@ -31,7 +45,9 @@ class FirstStep extends Component {
 
   render() {
 
-    const { spaces, cards } = this.state;
+    const { spaces } = this.state;
+    const { cards } = this.props;
+    console.log(cards)
     return (
       <div>
         <div class="row">
@@ -44,7 +60,7 @@ class FirstStep extends Component {
           )}
         </div>
         <div class="row">
-          {cards.map(({ title,statement, type }, index) =>
+          {cards.filter(t => t.location_id ==null).map(({ title,statement, type }, index) =>
             <Card title={title}
                   statement={statement}
                   type={type}
@@ -59,6 +75,8 @@ class FirstStep extends Component {
 
   handleDrop(index, item) {
     const { title } = item;
+    console.log("index:"+index);
+    console.log("item:"+item);
 
     this.setState(update(this.state, {
       spaces: {
@@ -68,10 +86,8 @@ class FirstStep extends Component {
           }
         }
       },
-      droppedCardNames: name ? {
-        $push: [name]
-      } : {}
     }));
+    this.props.dispatch(toggleLocation(item.index,index-3));
   }
 }
 
