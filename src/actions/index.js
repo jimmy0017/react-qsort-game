@@ -1,14 +1,4 @@
-// let nextTodoId = 0
-// export const addTodo = (text) => ({
-//   type: 'ADD_TODO',
-//   id: nextTodoId++,
-//   text
-// })
-//
-// export const setVisibilityFilter = (filter) => ({
-//   type: 'SET_VISIBILITY_FILTER',
-//   filter
-// })
+import C from '../constants'
 
 export const toggleLocation = (id,location_id) => ({
   type: 'TOGGLE_LOCATION',

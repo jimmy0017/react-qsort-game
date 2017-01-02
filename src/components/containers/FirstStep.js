@@ -10,7 +10,7 @@ import update from 'react/lib/update';
 
 import { connect } from "react-redux";
 // import { fetchStatement } from "../actions/statementsActions";
-import {toggleLocation,fetchLocationNullStatement} from "../actions/index";
+import {toggleLocation,fetchLocationNullStatement} from "../../actions/index";
 
 @connect((store) => {
   return {

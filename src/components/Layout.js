@@ -1,8 +1,8 @@
 import React from "react";
 
-import Footer from "./Footer";
-import Header from "./Header";
-import FirstStep from "./FirstStep";
+import Footer from "./containers/Footer";
+import Header from "./containers/Header";
+import FirstStep from "./containers/FirstStep";
 
 export default class Layout extends React.Component {
   constructor() {
@@ -13,7 +13,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div>
-        <Header  /> 
+        <Header  />
         <div class="container">
           <div class="row">
             <FirstStep />
@@ -24,3 +24,9 @@ export default class Layout extends React.Component {
     );
   }
 }
+
+export const Whoops404 = ({ location }) =>
+    <div className="whoops-404">
+        <h1>Whoops, route not found</h1>
+        <p>Cannot find content for {location.pathname}</p>
+    </div>
